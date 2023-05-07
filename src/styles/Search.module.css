@@ -1,0 +1,17 @@
+@import "../styles/variable.css";
+
+.searchBar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 55px auto;
+  width: 600px;
+  height: 55px;
+  padding: 25px;
+  border: 2px solid var(--yellow);
+  border-radius: 30px;
+}
+
+.searchBar::placeholder {
+  color: var(--font-color-light-gray);
+}

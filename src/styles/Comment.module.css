@@ -1,0 +1,29 @@
+.container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.container span {
+  font-weight: 700;
+}
+
+.container p {
+  font-size: 15px;
+  font-weight: 400;
+  color: var(--font-color-gray);
+}
+
+.btnContainer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.text {
+  font-size: 15px;
+  font-weight: 400;
+}

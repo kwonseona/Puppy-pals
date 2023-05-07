@@ -1,0 +1,32 @@
+h1 {
+  font-size: 24px;
+  font-weight: 700;
+  margin-bottom: 37px;
+  text-align: center;
+}
+
+.cardGrid {
+  margin: 0 auto;
+  padding-bottom: 30px;
+  width: 813px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  row-gap: 37px;
+}
+
+.moreBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.moreBtn button {
+  margin-bottom: 30px;
+  padding: 8px 25px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 50px;
+  font-weight: 700;
+  color: var(--font-color-black);
+  background-color: var(--yellow);
+  cursor: pointer;
+}

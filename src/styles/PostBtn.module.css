@@ -1,0 +1,97 @@
+@import "../styles/variable.css";
+
+.postBtn {
+  display: flex;
+  align-items: center;
+  position: fixed;
+  width: 102px;
+  height: 102px;
+  left: 90%;
+  top: 80%;
+  cursor: pointer;
+}
+
+.postBtn svg {
+  width: 60px;
+  height: 60px;
+  padding: 10px;
+  border-radius: 100px;
+  background-color: var(--yellow);
+  box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.25);
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.2);
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+  visibility: hidden;
+}
+
+.overlay.show {
+  opacity: 1;
+  visibility: visible;
+}
+
+.popup {
+  z-index: 100;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  height: 150px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.25);
+  border-radius: 20px 20px 0px 0px;
+  background-color: var(--white);
+  opacity: 0;
+  transform: translateY(100%);
+  transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out,
+    visibility 0s linear 0.3s;
+  visibility: hidden;
+}
+
+.popup.show {
+  opacity: 1;
+  transform: translateY(0%);
+  transition-delay: 0s;
+  visibility: visible;
+}
+
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 120px;
+}
+
+.line {
+  width: 1px;
+  height: 80px;
+  border-right: 3px solid var(--yellow);
+}
+
+.coummunity,
+.qna {
+  width: 300px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 10px;
+  cursor: pointer;
+}
+
+span {
+  font-weight: 700;
+}
+
+.coummunity:hover,
+.qna:hover {
+  opacity: 0.6;
+}

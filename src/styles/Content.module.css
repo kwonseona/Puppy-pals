@@ -1,0 +1,100 @@
+@import "../styles/variable.css";
+
+.content {
+  width: 800px;
+  min-height: calc(100vh - 84px);
+  padding: 50px 0;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
+}
+
+.titleContainer {
+  display: flex;
+  gap: 7px;
+}
+
+.btnContainer {
+  display: flex;
+}
+
+.textContainer {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: left;
+}
+
+.title {
+  font-size: 22px;
+  font-weight: 700;
+}
+
+.imgContainer {
+  text-align: center;
+}
+
+img {
+  width: 100%;
+  border-radius: 20px;
+  background-color: var(--yellow);
+}
+
+.like {
+  width: 72px;
+  height: 72px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+  border-radius: 100%;
+  background-color: var(--yellow);
+  cursor: pointer;
+}
+
+.like:hover {
+  opacity: 0.8;
+}
+
+.info {
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--font-color-light-gray);
+}
+
+.userInfo,
+.btnContainer {
+  display: flex;
+  gap: 30px;
+}
+
+button:hover {
+  opacity: 0.5;
+}
+
+form {
+  position: relative;
+}
+
+.comment {
+  width: 800px;
+  height: 156px;
+  padding: 20px;
+  border-radius: 20px;
+  border: 1px solid var(--yellow);
+  word-break: break-all;
+}
+
+.btn {
+  position: absolute;
+  top: 70%;
+  left: 86%;
+  width: 100px;
+  padding: 10px;
+  background-color: var(--yellow);
+  border-radius: 10px;
+  font-weight: 700;
+}

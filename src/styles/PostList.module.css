@@ -1,0 +1,80 @@
+@import "../styles/variable.css";
+
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 30px;
+  cursor: pointer;
+}
+
+.textContainer {
+  width: 968px;
+  display: grid;
+  grid-template-columns: 1fr 217px;
+  justify-content: center;
+  align-items: center;
+  padding-bottom: 30px;
+  border-bottom: 0.5px solid var(--font-color-light-gray);
+}
+
+.title {
+  display: flex;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.text {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  font-size: 15px;
+  color: var(--font-color-gray);
+}
+
+.img {
+  width: 217px;
+  height: 153px;
+  border-radius: 20px;
+  object-fit: cover;
+}
+
+.placeholder {
+  width: 217px;
+  height: 153px;
+}
+
+.author {
+  display: flex;
+  gap: 45px;
+}
+
+.author span {
+  font-size: 14px;
+  color: var(--font-color-gray);
+}
+
+/*페이지 네이션*/
+.pageNation {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 30px;
+}
+
+.btn {
+  fill: var(--yellow);
+}
+
+.next {
+  transform: rotate(180deg);
+}
+
+.activePage {
+  width: 30px;
+  height: 30px;
+  font-weight: bold;
+  background-color: var(--yellow);
+  border-radius: 100%;
+}
