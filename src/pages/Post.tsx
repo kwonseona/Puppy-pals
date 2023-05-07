@@ -31,7 +31,7 @@ export default function Post() {
       setTitle(editingPost.title)
       setContent(editingPost.content)
       setPrevImageUrl(editingPost.imageUrl)
-      // 이미지를 수정하는 경우를 처리하기 위해 필요한 로직 추가
+      // 이미지를 수정 로직 추가
     }
   }, [editingPost])
 
@@ -54,7 +54,7 @@ export default function Post() {
     const user = firebase.auth().currentUser
 
     if (!user) {
-      console.error("User is not logged in")
+      console.error("로그인 후 사용 가능")
       return
     }
 
@@ -70,7 +70,7 @@ export default function Post() {
         await imageRef.put(file)
         imageUrl = await imageRef.getDownloadURL()
       } catch (error: any) {
-        console.error("Failed to upload image:", error.message)
+        console.error("이미지 업로드 실패", error.message)
       }
     }
 
@@ -82,7 +82,7 @@ export default function Post() {
         try {
           await prevImageRef.delete()
         } catch (error: any) {
-          console.error("Failed to delete previous image:", error.message)
+          console.error("이전 이미지 삭제 실패", error.message)
         }
 
         // 새 이미지 업로드 및 Firestore에 글 데이터 업데이트
@@ -95,7 +95,7 @@ export default function Post() {
           })
           alert("게시글이 수정되었습니다.")
         } catch (error: any) {
-          console.error("Failed to update post:", error.message)
+          console.error("업데이트 실패", error.message)
         }
       }
     } else {
@@ -114,7 +114,7 @@ export default function Post() {
         setContent("")
         setFile(null)
       } catch (error: any) {
-        console.error("Failed to save post:", error.message)
+        console.error("글 저장 실패", error.message)
       }
     }
   }

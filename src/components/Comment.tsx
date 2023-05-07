@@ -38,10 +38,10 @@ export default function Comment({ data, onDelete, onUpdate }: CommentProps) {
       if (userData && userData.nickname) {
         return userData.nickname
       } else {
-        throw new Error("User data is undefined or nickname is missing")
+        throw new Error("닉네임 없음")
       }
     } catch (error: any) {
-      console.error("Failed to fetch user nickname:", error.message)
+      console.error("닉네임 수정 실패", error.message)
       return ""
     }
   }
@@ -62,7 +62,7 @@ export default function Comment({ data, onDelete, onUpdate }: CommentProps) {
       onUpdate({ ...data, content: editedContent })
       setIsEditing(false)
     } catch (error: any) {
-      console.error("Failed to update comment:", error.message)
+      console.error("댓글 업데이트 실패", error.message)
     }
   }
 
@@ -72,7 +72,7 @@ export default function Comment({ data, onDelete, onUpdate }: CommentProps) {
         await firebase.firestore().collection("comments").doc(data.id).delete()
         onDelete()
       } catch (error: any) {
-        console.error("Failed to delete comment:", error.message)
+        console.error("댓글 삭제 실패", error.message)
       }
     }
   }

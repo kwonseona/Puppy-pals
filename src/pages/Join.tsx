@@ -68,10 +68,10 @@ export default function Join() {
         })
       }
 
-      console.log("User signed up:", user)
+      console.log("로그인 성공", user)
       return true
     } catch (error) {
-      console.error("Error signing up:", error)
+      console.error("로그인 실패", error)
       return false
     }
   }
@@ -89,7 +89,7 @@ export default function Join() {
         setShowPopup(true)
       }
     } catch (error) {
-      console.error("Error checking email:", error)
+      console.error("이메일 에러", error)
     }
   }
 

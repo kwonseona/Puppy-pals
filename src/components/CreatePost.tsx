@@ -58,7 +58,7 @@ export default function CreatePost({ collectionName }: CreatePostProps) {
     const user = firebase.auth().currentUser
 
     if (!user) {
-      console.error("User is not logged in")
+      console.error("로그인 후 사용 가능")
       return
     }
 
@@ -74,7 +74,7 @@ export default function CreatePost({ collectionName }: CreatePostProps) {
         await imageRef.put(file)
         imageUrl = await imageRef.getDownloadURL()
       } catch (error: any) {
-        console.error("Failed to upload image:", error.message)
+        console.error("이미지 업로드 실패", error.message)
       }
     }
 
@@ -91,7 +91,7 @@ export default function CreatePost({ collectionName }: CreatePostProps) {
         // postId가 있으면 기존 게시물 수정
         const postDoc = await db.collection(collectionName).doc(postId).get()
         if (!postDoc.exists) {
-          console.error("Failed to update post: Post not found")
+          console.error("게시물 업데이트 실패")
           return
         }
         await db.collection(collectionName).doc(postId).update(postData)
@@ -117,7 +117,7 @@ export default function CreatePost({ collectionName }: CreatePostProps) {
       setContent("")
       setFile(null)
     } catch (error: any) {
-      console.error("Failed to save post:", error.message)
+      console.error("글 업데이트 실패", error.message)
     }
   }
 

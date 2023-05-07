@@ -163,10 +163,10 @@ export default function Content({ collectionName }: Props) {
       if (userData && userData.nickname) {
         return userData.nickname
       } else {
-        throw new Error("User data is undefined or nickname is missing")
+        throw new Error("실패")
       }
     } catch (error: any) {
-      console.error("Failed to fetch user nickname:", error.message)
+      console.error("닉네임 가져오기 실패", error.message)
       return ""
     }
   }

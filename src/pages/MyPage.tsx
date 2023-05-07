@@ -85,7 +85,7 @@ export default function MyPage() {
           // console.log("프로필 사진 없음")
           setProfileImgUrl(defaultProfileImgUrl)
         } else {
-          console.error("Failed to fetch profile picture:", error.message)
+          console.error("프로필 사진 가져오기 실패", error.message)
         }
       }
     }

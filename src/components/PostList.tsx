@@ -154,10 +154,10 @@ export default function PostList({ collectionName }: Props) {
       if (userData && userData.nickname) {
         return userData.nickname
       } else {
-        throw new Error("User data is undefined or nickname is missing")
+        throw new Error("닉네임을 찾지 못함")
       }
     } catch (error: any) {
-      console.error("Failed to fetch user nickname:", error.message)
+      console.error("닉네임 업데이트 실패", error.message)
       return ""
     }
   }
