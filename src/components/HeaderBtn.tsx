@@ -28,7 +28,7 @@ export default function HeaderBtn() {
           <button>마이페이지</button>
         </Link>
       ) : (
-        <Link to="/Login">
+        <Link to="/">
           <button>로그인</button>
         </Link>
       )}

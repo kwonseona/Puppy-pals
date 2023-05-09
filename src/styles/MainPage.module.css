@@ -1,4 +1,5 @@
 .mainPage {
+  width: 100%;
   min-height: calc(100vh - 82px);
 }
 
@@ -12,10 +13,11 @@ h1 {
 .cardGrid {
   margin: 0 auto;
   padding-bottom: 30px;
-  width: 813px;
+  max-width: 813px;
   display: grid;
   grid-template-columns: 1fr 1fr;
   row-gap: 37px;
+  justify-content: center;
 }
 
 .moreBtn {
@@ -33,4 +35,46 @@ h1 {
   color: var(--font-color-black);
   background-color: var(--yellow);
   cursor: pointer;
+}
+
+/* 태블릿 사이즈 */
+@media screen and (max-width: 768px) {
+  .cardGrid {
+    margin: 0 auto;
+    padding-bottom: 30px;
+    display: flex;
+    gap: 20px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .moreBtn button {
+    margin-bottom: 20px;
+    padding: 6px 20px;
+  }
+}
+
+/* 모바일 사이즈 */
+@media screen and (max-width: 480px) {
+  .mainPage {
+    padding: 0 15px;
+  }
+
+  h1 {
+    font-size: 20px;
+    margin-bottom: 20px;
+  }
+
+  .cardGrid {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    row-gap: 15px;
+  }
+
+  .moreBtn button {
+    margin-bottom: 15px;
+    padding: 4px 15px;
+  }
 }

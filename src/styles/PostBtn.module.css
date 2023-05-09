@@ -1,6 +1,7 @@
 @import "../styles/variable.css";
 
 .postBtn {
+  z-index: 9998;
   display: flex;
   align-items: center;
   position: fixed;
@@ -95,4 +96,11 @@ span {
 .coummunity:hover,
 .qna:hover {
   opacity: 0.6;
+}
+
+@media screen and (max-width: 425px) {
+  .postBtn {
+    top: 75%;
+    left: 80%;
+  }
 }

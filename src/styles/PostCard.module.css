@@ -39,3 +39,13 @@
   font-size: 14px;
   font-weight: 700;
 }
+
+@media screen and (max-width: 786px) {
+  .card {
+    width: 279px;
+  }
+
+  .cardImg img {
+    width: 100%;
+  }
+}

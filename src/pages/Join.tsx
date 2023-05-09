@@ -8,6 +8,10 @@ import {
   useLocation,
   Link,
 } from "react-router-dom"
+import backgroundVideo from "../assets/강아지 배경.mp4"
+import { HiMail, HiKey } from "react-icons/hi"
+import { GiSittingDog } from "react-icons/gi"
+import { BsFillCalendarDateFill } from "react-icons/bs"
 
 export default function Join() {
   const [showPopup, setShowPopup] = useState(false)
@@ -120,11 +124,14 @@ export default function Join() {
   return (
     <>
       <div className={styles.container}>
-        <img className={styles.logo} src="src/assets/Puppy Pals.png" />
+        <video muted autoPlay loop>
+          <source src={backgroundVideo} type="video/mp4" />
+        </video>
         <div className={styles.loginContainer}>
           <h1>반려인</h1>
           <form className={styles.formContainer} onSubmit={handleSubmit}>
             <div className={styles.inputWrapper}>
+              <HiMail className={styles.icon} size={24} />
               <input
                 className={styles.input}
                 type="email"
@@ -142,22 +149,29 @@ export default function Join() {
                 중복체크
               </button>
             </div>
-            <input
-              className={styles.input}
-              type="password"
-              placeholder="비밀번호를 입력하세요."
-              value={password}
-              onChange={(event) => setPassword(event.target.value)}
-            />
-            <input
-              className={styles.input}
-              type="password"
-              placeholder="비밀번호를 한번 더 입력하세요."
-              value={confirmPassword}
-              onChange={(event) => setConfirmPassword(event.target.value)}
-            />
+            <div className={styles.inputWrapper}>
+              <HiKey className={styles.icon} size={24} />
+              <input
+                className={styles.input}
+                type="password"
+                placeholder="비밀번호를 입력하세요."
+                value={password}
+                onChange={(event) => setPassword(event.target.value)}
+              />
+            </div>
+            <div className={styles.inputWrapper}>
+              <HiKey className={styles.icon} size={24} />
+              <input
+                className={styles.input}
+                type="password"
+                placeholder="비밀번호를 한번 더 입력하세요."
+                value={confirmPassword}
+                onChange={(event) => setConfirmPassword(event.target.value)}
+              />
+            </div>
             <h1 className={styles.pet}>반려동물</h1>
             <div className={styles.inputWrapper}>
+              <GiSittingDog className={styles.icon} size={24} />
               <input
                 className={styles.input}
                 type="text"
@@ -166,12 +180,15 @@ export default function Join() {
                 onChange={(event) => setPetName(event.target.value)}
               />
             </div>
-            <input
-              className={styles.input}
-              type="date"
-              value={birthday}
-              onChange={(event) => setBirthday(event.target.value)}
-            />
+            <div className={styles.inputWrapper}>
+              <BsFillCalendarDateFill className={styles.icon} size={22} />
+              <input
+                className={styles.input}
+                type="date"
+                value={birthday}
+                onChange={(event) => setBirthday(event.target.value)}
+              />
+            </div>
             <div className={styles.btnContainer}>
               <button
                 className={styles.btn}
@@ -192,7 +209,7 @@ export default function Join() {
               <div className={styles.popupTitle}>
                 <span>Puppy Pals 회원이 되신걸 축하드립니다.</span>
                 <div className={styles.popupBtn}>
-                  <Link to="/">
+                  <Link to="/MainPage">
                     <button className={styles.btn}>홈으로</button>
                   </Link>
                 </div>

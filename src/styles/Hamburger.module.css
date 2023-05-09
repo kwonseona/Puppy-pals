@@ -1,0 +1,28 @@
+.hamburger {
+  display: none;
+  align-items: center;
+  justify-content: flex-end;
+  /* padding: 10px; */
+  margin-right: 20px;
+}
+
+.hamburgerMenu {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: var(--yellow);
+}
+
+@media screen and (max-width: 768px) {
+  .hamburger {
+    display: block;
+  }
+}
+
+@media screen and (max-width: 425px) {
+  .hamburger {
+    display: block;
+  }
+}

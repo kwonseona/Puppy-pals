@@ -125,6 +125,10 @@ form {
   background-color: var(--blue);
 }
 
-.icon {
+.liked {
+  color: var(--font-color-black);
+}
+.notLike {
   fill: var(--white);
+  color: var(--white);
 }

@@ -16,3 +16,21 @@
 .nav li:hover {
   border-bottom: 3px solid var(--white);
 }
+
+@media screen and (max-width: 768px) {
+  .nav {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .nav li {
+    color: var(--white);
+  }
+}
+
+@media screen and (max-width: 425px) {
+  .nav {
+    display: flex;
+    flex-direction: column;
+  }
+}

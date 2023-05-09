@@ -251,9 +251,11 @@ export default function Content({ collectionName }: Props) {
       </div>
       <div className={styles.like} onClick={toggleLike}>
         <button>
-          <FaHeart className={isLiked ? styles.iconLiked : styles.icon} />
+          <FaHeart className={isLiked ? styles.liked : styles.notLike} />
         </button>
-        <span className={styles.likeNumber}>{likeCount}</span>
+        <span className={isLiked ? styles.liked : styles.notLike}>
+          {likeCount}
+        </span>
       </div>
       <div className={styles.info}>
         <div className={styles.userInfo}>

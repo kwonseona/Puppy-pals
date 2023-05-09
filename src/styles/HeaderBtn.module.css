@@ -34,3 +34,15 @@
     transform: rotate(360deg);
   }
 }
+
+@media screen and (max-width: 768px) {
+  .btn {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 425px) {
+  .btn {
+    display: none;
+  }
+}

@@ -4,6 +4,7 @@
   z-index: 9999;
   position: sticky;
   top: 0;
+  width: 100vw;
   height: 64px;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
@@ -19,6 +20,39 @@
   color: var(--font-color-black);
 }
 
-.logo label {
+.logo img {
+  width: 120px;
   cursor: pointer;
+}
+
+/* 테블릿 */
+@media (max-width: 768px) {
+  .container {
+    display: flex;
+    height: 56px;
+    padding: 20px;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .logo {
+    padding: 10px;
+    font-size: 18px;
+  }
+}
+
+/* 모바일 */
+@media (max-width: 480px) {
+  .container {
+    display: flex;
+    height: 56px;
+    padding: 10px;
+    align-items: center;
+    justify-content: space-between;
+    height: 48px;
+  }
+
+  .logo img {
+    width: 90px;
+  }
 }
