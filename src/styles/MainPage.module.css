@@ -1,3 +1,7 @@
+.mainPage {
+  min-height: calc(100vh - 82px);
+}
+
 h1 {
   font-size: 24px;
   font-weight: 700;

@@ -35,7 +35,7 @@
   text-align: center;
 }
 
-img {
+.imgContainer img {
   width: 100%;
   border-radius: 20px;
   background-color: var(--yellow);
@@ -62,7 +62,7 @@ img {
   display: flex;
   justify-content: space-between;
   padding-bottom: 20px;
-  border-bottom: 1px solid var(--font-color-light-gray);
+  border-bottom: 0.5px solid var(--font-color-light-gray);
 }
 
 .userInfo,
@@ -97,4 +97,34 @@ form {
   background-color: var(--yellow);
   border-radius: 10px;
   font-weight: 700;
+}
+
+.dogbedge {
+  width: 100px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  border-radius: 30px;
+  font-weight: 700;
+  color: var(--white);
+  background-color: var(--green);
+}
+
+.catbedge {
+  width: 100px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  border-radius: 30px;
+  font-weight: 700;
+  color: var(--white);
+  background-color: var(--blue);
+}
+
+.icon {
+  fill: var(--white);
 }

@@ -1,7 +1,6 @@
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom"
 import "./App.css"
 import "./styles/reset.css"
-import PrivateRoute from "./components/PrivateRoute"
 import Header from "./components/Header"
 import CreatePost from "./components/CreatePost"
 import MainPage from "./pages/MainPage"
@@ -14,6 +13,7 @@ import Join from "./pages/Join"
 import Content from "./pages/Content"
 import Footer from "./components/Footer"
 import PostBtn from "./components/PostBtn"
+import SearchResultsPage from "./pages/SearchResultPage"
 
 function App() {
   return (
@@ -21,10 +21,10 @@ function App() {
       <Header />
       <PostBtn />
       <Routes>
-        <Route path="/" element={<MainPage />} />
+        <Route path="/" element={<Login />} />
+        <Route path="/MainPage" element={<MainPage />} />
         <Route path="/Community/*" element={<Community />} />
         <Route path="/QnA" element={<QnA />} />
-        <Route path="/Login" element={<Login />} />
         <Route path="/Join" element={<Join />} />
         <Route path="/MyPage" element={<MyPage />} />
         <Route path="/MyPagePet" element={<MyPagePet />} />
@@ -45,6 +45,14 @@ function App() {
           element={<Content collectionName="QnAposts" />}
         />
         <Route
+          path="/content/:collectionName/:postId"
+          element={<Content collectionName="posts" />}
+        />
+        <Route
+          path="/content/:collectionName/:postId"
+          element={<Content collectionName="QnAposts" />}
+        />
+        <Route
           path="/posts/edit/:postId"
           element={<CreatePost collectionName="posts" />}
         />
@@ -52,6 +60,7 @@ function App() {
           path="/QnAposts/edit/:postId"
           element={<CreatePost collectionName="QnAposts" />}
         />
+        <Route path="/search-results" element={<SearchResultsPage />} />
       </Routes>
       <Footer />
     </Router>

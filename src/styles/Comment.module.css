@@ -3,6 +3,12 @@
   display: flex;
   flex-direction: column;
   gap: 10px;
+  padding-bottom: 30px;
+  border-bottom: 0.5px solid var(--font-color-light-gray);
+}
+
+.container:last-child {
+  border: none;
 }
 
 .container span {

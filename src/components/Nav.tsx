@@ -6,7 +6,7 @@ const Nav = () => {
   return (
     <ul className={styles.nav}>
       <li>
-        <Link to="/">홈</Link>
+        <Link to="/MainPage">홈</Link>
       </li>
       <li>
         <Link to="/Community">커뮤니티</Link>

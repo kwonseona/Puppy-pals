@@ -1,0 +1,7 @@
+.container {
+  min-height: calc(100vh - 84px);
+}
+
+.container h1 {
+  margin: 50px;
+}

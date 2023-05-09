@@ -5,9 +5,11 @@ import "firebase/compat/auth"
 import styles from "../styles/PostList.module.css"
 import { MdPlayArrow } from "react-icons/md"
 import { useNavigate } from "react-router-dom"
+import { FaDog, FaCat } from "react-icons/fa"
 
-interface Post {
+export interface Post {
   id: string
+  category: string
   title: string
   content: string
   imageUrl: string
@@ -18,9 +20,10 @@ interface Post {
 
 interface Props {
   collectionName: string
+  searchResults?: Post[]
 }
 
-export default function PostList({ collectionName }: Props) {
+export default function PostList({ collectionName, searchResults }: Props) {
   const postsPerPage = 4
   const [posts, setPosts] = useState<Post[]>([])
   const [currentPage, setCurrentPage] = useState(1)
@@ -30,17 +33,36 @@ export default function PostList({ collectionName }: Props) {
   const [firstVisible, setFirstVisible] =
     useState<firebase.firestore.QueryDocumentSnapshot | null>(null)
   const [hasMorePosts, setHasMorePosts] = useState(true)
-
   const navigate = useNavigate()
 
   const handlePostClick = (postId: string) => {
     navigate(`/content/${collectionName}/${postId}`)
   }
 
+  const processSearchResults = async (results: Post[]) => {
+    const processedResults: Post[] = await Promise.all(
+      results.map(async (post) => {
+        const authorNickname = await fetchUserNickname(post.author)
+        const commentCount = await fetchCommentCount(post.id)
+        return {
+          ...post,
+          author: authorNickname,
+          commentCount,
+        }
+      }),
+    )
+
+    setPosts(processedResults)
+  }
+
   useEffect(() => {
-    fetchPosts()
-    fetchTotalPosts()
-  }, [currentPage, collectionName])
+    if (searchResults) {
+      processSearchResults(searchResults)
+    } else {
+      fetchPosts()
+      fetchTotalPosts()
+    }
+  }, [currentPage, collectionName, searchResults])
 
   const fetchCommentCount = async (postId: string): Promise<number> => {
     try {
@@ -164,42 +186,59 @@ export default function PostList({ collectionName }: Props) {
 
   return (
     <div>
-      {posts.map((post: Post) => (
-        <div
-          key={post.id}
-          className={styles.container}
-          onClick={() => handlePostClick(post.id)}
-        >
-          <div className={styles.textContainer}>
-            <div className={styles.text}>
-              <span className={styles.title}>{post.title}</span>
-              <p className={styles.text}>{post.content}</p>
-            </div>
-            <div className={styles.postImg}>
-              {post.imageUrl ? (
-                <img
-                  src={post.imageUrl}
-                  alt={post.title}
-                  className={styles.img}
-                />
-              ) : (
-                <div className={styles.placeholder} />
-              )}
-            </div>
-            <div className={styles.author}>
-              <span>{post.author}</span>
-              <span>댓글 {post.commentCount}</span>
-              <span>
-                {post.createdAt &&
-                  new Date(
-                    post.createdAt.seconds * 1000 +
-                      post.createdAt.nanoseconds / 1000000,
-                  ).toLocaleString()}
-              </span>
+      {posts.length === 0 && searchResults ? (
+        <div className={styles.results}>검색된 결과가 없습니다.</div>
+      ) : (
+        posts.map((post: Post) => (
+          <div
+            key={post.id}
+            className={styles.container}
+            onClick={() => handlePostClick(post.id)}
+          >
+            <div className={styles.textContainer}>
+              <div className={styles.text}>
+                <div className={styles.btnContainer}>
+                  {post.category === "dog" ? (
+                    <label className={styles.dogbedge}>
+                      <FaDog className={styles.icon} />
+                      강아지
+                    </label>
+                  ) : post.category === "cat" ? (
+                    <label className={styles.catbedge}>
+                      <FaCat className={styles.icon} />
+                      고양이
+                    </label>
+                  ) : null}
+                </div>
+                <span className={styles.title}>{post.title}</span>
+                <p className={styles.text}>{post.content}</p>
+              </div>
+              <div className={styles.postImg}>
+                {post.imageUrl ? (
+                  <img
+                    src={post.imageUrl}
+                    alt={post.title}
+                    className={styles.img}
+                  />
+                ) : (
+                  <div className={styles.placeholder} />
+                )}
+              </div>
+              <div className={styles.author}>
+                <span>{post.author}</span>
+                <span>댓글 {post.commentCount}</span>
+                <span>
+                  {post.createdAt &&
+                    new Date(
+                      post.createdAt.seconds * 1000 +
+                        post.createdAt.nanoseconds / 1000000,
+                    ).toLocaleString()}
+                </span>
+              </div>
             </div>
           </div>
-        </div>
-      ))}
+        ))
+      )}
       <div className={styles.pageNation}>
         <button
           className={styles.prev}

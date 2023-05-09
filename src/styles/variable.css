@@ -2,10 +2,14 @@
   --yellow: #ffd700;
   --orange: #ffb800;
   --green: #4caf50;
+  --deep-green: #005a04;
   --blue: #2196f3;
+  --deep-blue: #004f8d;
   --white: #fff;
   --font-color-black: #3f3f3f;
   --font-color-gray: #767676;
   --font-color-light-gray: #b6b6b6;
+  --button-font-color: #acacac;
+  --button-color-gray: rgba(239, 239, 239, 1);
   --bgc-color-black: 63, 63, 63;
 }

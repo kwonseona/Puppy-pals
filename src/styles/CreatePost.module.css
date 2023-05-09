@@ -39,6 +39,10 @@
   cursor: pointer;
 }
 
+.icon {
+  fill: var(--white);
+}
+
 .catbedge {
   width: 100px;
   height: 30px;
@@ -71,12 +75,34 @@
 .text {
   width: 700px;
   height: 500px;
-  padding: 0 20px;
+  padding: 20px;
   border: 1px solid var(--yellow);
   border-radius: 30px;
+  resize: none;
 }
 
 .file {
+  width: 140px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  border-radius: 20px;
+  padding: 10px;
+  background-color: var(--button-color-gray);
+  cursor: pointer;
+}
+
+.file span {
+  font-weight: 700;
+  color: var(--button-font-color);
+}
+
+input[type="file"] {
+  display: none;
+}
+
+.fileInput {
   display: flex;
   flex-direction: column;
   gap: 20px;
@@ -100,6 +126,10 @@
   background-color: var(--font-color-black);
 }
 
-.file {
-  background-color: var(--yellow);
+.dogbedge:focus {
+  background-color: var(--deep-green);
+}
+
+.catbedge:focus {
+  background-color: var(--deep-blue);
 }

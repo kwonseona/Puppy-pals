@@ -20,18 +20,23 @@ export default function Content({ collectionName }: Props) {
   const postRef = firestore.collection(collectionName).doc(postId)
   const [post, loading, error] = useDocumentDataOnce(postRef)
   const postWithDefaults = {
-    commentCount: 0,
     ...post,
+    commentCount: post?.commentCount || 0,
   }
   const createdAt = postWithDefaults?.createdAt
     ? new Date(postWithDefaults.createdAt.seconds * 1000).toLocaleDateString()
     : "Unknown"
   const navigate = useNavigate()
   const [currentUserId, setCurrentUserId] = useState("")
+  const [likeCount, setLikeCount] = useState(
+    postWithDefaults.likes ? postWithDefaults.likes : 0,
+  )
   const [isLiked, setIsLiked] = useState(false)
-  const [likeCount, setLikeCount] = useState(0)
   const [comments, setComments] = useState<CommentData[]>([])
   const [commentText, setCommentText] = useState("")
+  const likeDocRef = firestore
+    .collection("likes")
+    .doc(`${currentUserId}_${postId}`)
 
   const checkUserLike = async () => {
     if (currentUserId) {
@@ -40,7 +45,11 @@ export default function Content({ collectionName }: Props) {
         .doc(`${currentUserId}_${postId}`)
         .get()
 
-      setIsLiked(likeDoc.exists)
+      if (likeDoc.exists) {
+        setIsLiked(true)
+      } else {
+        setIsLiked(false)
+      }
     }
   }
 
@@ -85,6 +94,11 @@ export default function Content({ collectionName }: Props) {
 
     if (post) {
       fetchComments()
+      postRef.update({ commentCount: comments.length })
+    }
+
+    if (post) {
+      setLikeCount(post.likes)
     }
   }, [post, currentUserId])
 
@@ -92,8 +106,12 @@ export default function Content({ collectionName }: Props) {
     setComments(comments.filter((comment) => comment.id !== commentId))
 
     // 게시글의 commentCount를 업데이트
-    const updatedCommentCount = post.commentCount + 1
+    const updatedCommentCount = post.commentCount - 1
     await postRef.update({ commentCount: updatedCommentCount })
+    postWithDefaults({
+      ...postWithDefaults,
+      commentCount: updatedCommentCount,
+    })
   }
 
   const addComment = async (e: React.FormEvent) => {
@@ -125,6 +143,10 @@ export default function Content({ collectionName }: Props) {
       // 게시글의 commentCount를 업데이트
       const updatedCommentCount = post.commentCount + 1
       await postRef.update({ commentCount: updatedCommentCount })
+      postWithDefaults({
+        ...postWithDefaults,
+        commentCount: updatedCommentCount,
+      })
     } catch (error: any) {
       console.error("Failed to add comment:", error.message)
     }
@@ -181,16 +203,14 @@ export default function Content({ collectionName }: Props) {
       return
     }
 
-    const likeDocRef = firestore
-      .collection("likes")
-      .doc(`${currentUserId}_${postId}`)
+    const likeDoc = await likeDocRef.get()
 
     let updatedLikeCount
 
-    if (isLiked) {
+    if (likeDoc.exists) {
       await likeDocRef.delete()
       setIsLiked(false)
-      updatedLikeCount = likeCount - 1
+      updatedLikeCount = likeCount ? likeCount - 1 : 0
       setLikeCount(updatedLikeCount)
     } else {
       await likeDocRef.set({
@@ -198,7 +218,7 @@ export default function Content({ collectionName }: Props) {
         postId,
       })
       setIsLiked(true)
-      updatedLikeCount = likeCount + 1
+      updatedLikeCount = likeCount ? likeCount + 1 : 1
       setLikeCount(updatedLikeCount)
     }
 
@@ -208,17 +228,20 @@ export default function Content({ collectionName }: Props) {
   return (
     <div className={styles.content}>
       <div className={styles.titleContainer}>
-        <span className={styles.title}>{post.title}</span>
         <div className={styles.btnContainer}>
-          <button className={btnstyles.dogbedge}>
-            <FaDog />
-            강아지
-          </button>
-          <button className={btnstyles.catbedge}>
-            <FaCat />
-            고양이
-          </button>
+          {post.category === "dog" ? (
+            <label className={styles.dogbedge}>
+              <FaDog className={styles.icon} />
+              강아지
+            </label>
+          ) : post.category === "cat" ? (
+            <label className={styles.catbedge}>
+              <FaCat />
+              고양이
+            </label>
+          ) : null}
         </div>
+        <span className={styles.title}>{post.title}</span>
       </div>
       <div className={styles.textContainer}>
         <p>{post.content}</p>
@@ -235,7 +258,7 @@ export default function Content({ collectionName }: Props) {
       <div className={styles.info}>
         <div className={styles.userInfo}>
           <span className={styles.author}>{nickname}</span>
-          <span>댓글 {postWithDefaults.commentCount}</span>
+          <span>댓글 {postWithDefaults.commentCount || 0}</span>
           <span className={styles.date}>{createdAt}</span>
         </div>
         {post.author === currentUserId && (

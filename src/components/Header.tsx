@@ -7,7 +7,7 @@ export default function Header() {
   return (
     <div className={styles.container}>
       <div className={styles.logo}>
-        <Link to="/">
+        <Link to="/MainPage">
           <label>
             <svg
               width="102"

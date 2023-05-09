@@ -19,6 +19,7 @@ export default function CreatePost({ collectionName }: CreatePostProps) {
   const [userId, setUserId] = useState("")
   const location = useLocation()
   const [postId, setPostId] = useState<string | null>(null)
+  const [category, setCategory] = useState("")
   const navigate = useNavigate()
 
   useEffect(() => {
@@ -43,12 +44,25 @@ export default function CreatePost({ collectionName }: CreatePostProps) {
     setTitle(e.target.value)
   }
 
-  const handleContentChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleContentChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setContent(e.target.value)
   }
 
+  const handleCategoryChange = (category: string) => {
+    setCategory(category)
+  }
+
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setFile(e.target.files ? e.target.files[0] : null)
+    if (e.target.files) {
+      const fileWithUniqueId = new File(
+        [e.target.files[0]],
+        `${userId}_${Date.now()}_${e.target.files[0].name}`,
+        { type: e.target.files[0].type },
+      )
+      setFile(fileWithUniqueId)
+    } else {
+      setFile(null)
+    }
   }
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -81,6 +95,7 @@ export default function CreatePost({ collectionName }: CreatePostProps) {
     const postData = {
       title,
       content,
+      category,
       imageUrl,
       author: user.uid,
       createdAt: firebase.firestore.FieldValue.serverTimestamp(),
@@ -126,12 +141,18 @@ export default function CreatePost({ collectionName }: CreatePostProps) {
       <div className={styles.topContainer}>
         <span className={styles.title}>카테고리</span>
         <div className={styles.btnContainer}>
-          <button className={styles.dogbedge}>
+          <button
+            className={styles.dogbedge}
+            onClick={() => handleCategoryChange("dog")}
+          >
             <FaDog className={styles.icon} />
             강아지
           </button>
-          <button className={styles.catbedge}>
-            <FaCat />
+          <button
+            className={styles.catbedge}
+            onClick={() => handleCategoryChange("cat")}
+          >
+            <FaCat className={styles.icon} />
             고양이
           </button>
         </div>
@@ -146,19 +167,38 @@ export default function CreatePost({ collectionName }: CreatePostProps) {
             value={title}
             onChange={handleTitleChange}
           ></input>
-          <input
+          <textarea
             className={styles.text}
-            type="text"
             placeholder="본문을 입력해주세요."
             value={content}
             onChange={handleContentChange}
-          ></input>
+          ></textarea>
         </div>
-        <div>
-          <h3 className={styles.title}>첨부 파일</h3>
+        <div className={styles.fileInput}>
+          <h3 className={styles.title}>사진 등록</h3>
+          <label className={styles.file} htmlFor="file">
+            <svg
+              width="27"
+              height="24"
+              viewBox="0 0 27 24"
+              fill="#ffffff"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M13.5 17.6333C15.7828 17.6333 17.6333 15.7828 17.6333 13.5C17.6333 11.2172 15.7828 9.36667 13.5 9.36667C11.2172 9.36667 9.36667 11.2172 9.36667 13.5C9.36667 15.7828 11.2172 17.6333 13.5 17.6333Z"
+                fill="#ACACAC"
+              />
+              <path
+                d="M9.62501 0.583344L7.26126 3.16668H3.16668C1.74584 3.16668 0.583344 4.32918 0.583344 5.75001V21.25C0.583344 22.6708 1.74584 23.8333 3.16668 23.8333H23.8333C25.2542 23.8333 26.4167 22.6708 26.4167 21.25V5.75001C26.4167 4.32918 25.2542 3.16668 23.8333 3.16668H19.7388L17.375 0.583344H9.62501ZM13.5 19.9583C9.93501 19.9583 7.04168 17.065 7.04168 13.5C7.04168 9.93501 9.93501 7.04168 13.5 7.04168C17.065 7.04168 19.9583 9.93501 19.9583 13.5C19.9583 17.065 17.065 19.9583 13.5 19.9583Z"
+                fill="#ACACAC"
+              />
+            </svg>
+            <span>첨부 파일</span>
+          </label>
           <input
-            className={styles.file}
+            id="file"
             type="file"
+            accept=".jpg, .jpeg, .png"
             onChange={handleFileChange}
           />
         </div>
