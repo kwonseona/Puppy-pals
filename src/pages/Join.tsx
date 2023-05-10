@@ -1,6 +1,6 @@
 import styles from "../styles/Join.module.css"
 import React, { useState, FormEvent } from "react"
-import { firebase } from "../components/firebaseConfig"
+import { firebase } from "../components/firebaseConfig.js"
 import {
   BrowserRouter as Router,
   Route,

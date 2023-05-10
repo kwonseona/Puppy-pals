@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react"
 import { useNavigate } from "react-router-dom"
 import styles from "../styles/PostCard.module.css"
-import { firebase } from "../components/firebaseConfig"
+import { firebase } from "./firebaseConfig.js"
 
 export interface PostData {
   id: string

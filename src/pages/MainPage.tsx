@@ -2,7 +2,7 @@ import { useState, useEffect } from "react"
 import styles from "../styles/MainPage.module.css"
 import PostCard from "../components/PostCard"
 import Search from "../components/Search"
-import { firebase } from "../components/firebaseConfig"
+import { firebase } from "../components/firebaseConfig.js"
 import InfiniteScroll from "react-infinite-scroll-component"
 import { PostData } from "../components/PostCard" // 임포트 추가
 
