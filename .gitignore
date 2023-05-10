@@ -24,4 +24,4 @@ dist-ssr
 *.sw?
 
 # Ignore firebaseConfig.ts
-firebaseConfig.ts
+firebaseConfig.tsx
