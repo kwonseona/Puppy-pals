@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom"
 interface Post {
   id: string
   title: string
+  collectionName: string
 }
 
 export default function Search() {
@@ -17,12 +18,22 @@ export default function Search() {
   useEffect(() => {
     const fetchData = async () => {
       const db = firebase.firestore()
-      const snapshot = await db.collection("posts").get()
-      const fetchedPosts = snapshot.docs.map((doc) => ({
+
+      const snapshotPosts = await db.collection("posts").get()
+      const fetchedPosts = snapshotPosts.docs.map((doc) => ({
         id: doc.id,
         ...doc.data(),
+        collectionName: "posts",
       })) as Post[]
-      setPosts(fetchedPosts)
+
+      const snapshotQnAPosts = await db.collection("QnAposts").get()
+      const fetchedQnAPosts = snapshotQnAPosts.docs.map((doc) => ({
+        id: doc.id,
+        ...doc.data(),
+        collectionName: "QnAposts",
+      })) as Post[]
+
+      setPosts([...fetchedPosts, ...fetchedQnAPosts])
     }
 
     fetchData()
@@ -37,6 +48,7 @@ export default function Search() {
       const results = posts.filter((post) =>
         post.title.toLowerCase().includes(searchQuery.toLowerCase()),
       )
+      // 전체 검색 결과를 state로 전달
       navigate("/search-results", { state: { results } })
     }
   }

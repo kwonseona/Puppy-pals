@@ -236,15 +236,15 @@ export default function Content({ collectionName }: Props) {
             </label>
           ) : post.category === "cat" ? (
             <label className={styles.catbedge}>
-              <FaCat />
+              <FaCat className={styles.icon} />
               고양이
             </label>
           ) : null}
         </div>
         <span className={styles.title}>{post.title}</span>
       </div>
-      <div className={styles.textContainer}>
-        <p>{post.content}</p>
+      <div>
+        <pre className={styles.textContainer}>{post.content}</pre>
       </div>
       <div className={styles.imgContainer}>
         {post.imageUrl && <img src={post.imageUrl} alt="Post" />}

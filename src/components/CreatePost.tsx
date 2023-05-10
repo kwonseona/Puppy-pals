@@ -21,6 +21,7 @@ export default function CreatePost({ collectionName }: CreatePostProps) {
   const [postId, setPostId] = useState<string | null>(null)
   const [category, setCategory] = useState("")
   const navigate = useNavigate()
+  const [prevImageUrl, setPrevImageUrl] = useState("")
 
   useEffect(() => {
     const fetchUserId = () => {
@@ -35,6 +36,8 @@ export default function CreatePost({ collectionName }: CreatePostProps) {
       setTitle(location.state.post.title)
       setContent(location.state.post.content)
       setPostId(location.state.post.id) // postId 상태 설정
+      setPrevImageUrl(location.state.post.imageUrl) // 이전 이미지 URL 상태 설정
+      setCategory(location.state.post.category) // 카테고리 상태 설정
     }
 
     fetchUserId()
@@ -79,7 +82,7 @@ export default function CreatePost({ collectionName }: CreatePostProps) {
     const db = firebase.firestore()
 
     // 파일 업로드 처리
-    let imageUrl = ""
+    let imageUrl = prevImageUrl
     if (file) {
       const storageRef = firebase.storage().ref()
       const imageRef = storageRef.child(`postImages/${file.name}`)
@@ -87,6 +90,14 @@ export default function CreatePost({ collectionName }: CreatePostProps) {
       try {
         await imageRef.put(file)
         imageUrl = await imageRef.getDownloadURL()
+
+        // 이전 이미지 삭제
+        if (prevImageUrl) {
+          const prevImageRef = storageRef.child(
+            `postImages/${postId}_${prevImageUrl.split("_")[1]}`,
+          )
+          await prevImageRef.delete()
+        }
       } catch (error: any) {
         console.error("이미지 업로드 실패", error.message)
       }
@@ -142,14 +153,18 @@ export default function CreatePost({ collectionName }: CreatePostProps) {
         <span className={styles.title}>카테고리</span>
         <div className={styles.btnContainer}>
           <button
-            className={styles.dogbedge}
+            className={`${styles.dogbedge} ${
+              category === "dog" ? styles.selectedCategory : ""
+            }`}
             onClick={() => handleCategoryChange("dog")}
           >
             <FaDog className={styles.icon} />
             강아지
           </button>
           <button
-            className={styles.catbedge}
+            className={`${styles.catbedge} ${
+              category === "cat" ? styles.selectedCategoryCat : ""
+            }`}
             onClick={() => handleCategoryChange("cat")}
           >
             <FaCat className={styles.icon} />

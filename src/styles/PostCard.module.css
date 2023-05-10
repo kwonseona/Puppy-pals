@@ -30,6 +30,12 @@
   font-size: 14px;
   font-weight: 400;
   color: var(--font-color-gray);
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: pre-wrap;
 }
 
 .author {
@@ -43,6 +49,7 @@
 @media screen and (max-width: 786px) {
   .card {
     width: 279px;
+    margin-bottom: 20px;
   }
 
   .cardImg img {

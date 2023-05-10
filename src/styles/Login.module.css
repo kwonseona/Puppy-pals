@@ -6,19 +6,20 @@
   top: 0;
   left: 0;
   width: 100%;
-  min-height: 100vh;
+  height: 100%;
   background-color: var(--yellow);
 }
 
 .container video {
   width: 100%;
-  height: auto;
+  height: 100%;
   opacity: 0.8;
+  object-fit: cover;
 }
 
 .loginContainer {
   position: absolute;
-  width: 738px;
+  width: 50%;
   height: 100%;
   right: 0px;
   top: 0px;
@@ -120,4 +121,48 @@ form {
   position: absolute;
   left: 10px;
   fill: var(--yellow);
+}
+
+@media screen and (max-width: 768px) {
+  .logo {
+    gap: 10px;
+  }
+
+  .logo img {
+    width: 150px;
+  }
+
+  .logo span {
+    font-size: 12px;
+  }
+
+  .btn {
+    width: 100px;
+    font-size: 14px;
+    padding: 15px;
+  }
+
+  .google img {
+    height: 40px;
+  }
+}
+
+@media screen and (max-width: 425px) {
+  .container video {
+    display: none;
+  }
+
+  .container {
+    position: fixed;
+    top: 0;
+    left: 0;
+  }
+
+  .loginContainer {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    border-radius: 0;
+  }
 }

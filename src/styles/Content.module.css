@@ -21,9 +21,8 @@
 
 .textContainer {
   width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: left;
+  overflow-wrap: break-word;
+  white-space: pre-wrap;
 }
 
 .title {
@@ -97,6 +96,10 @@ form {
   background-color: var(--yellow);
   border-radius: 10px;
   font-weight: 700;
+}
+
+.icon {
+  fill: var(--white);
 }
 
 .dogbedge {

@@ -37,19 +37,11 @@ function App() {
           element={<CreatePost collectionName="QnAposts" />}
         />
         <Route
-          path="/content/posts/:postId"
+          path="/posts/:postId"
           element={<Content collectionName="posts" />}
         />
         <Route
-          path="/content/QnAposts/:postId"
-          element={<Content collectionName="QnAposts" />}
-        />
-        <Route
-          path="/content/:collectionName/:postId"
-          element={<Content collectionName="posts" />}
-        />
-        <Route
-          path="/content/:collectionName/:postId"
+          path="/QnAposts/:postId"
           element={<Content collectionName="QnAposts" />}
         />
         <Route

@@ -20,6 +20,10 @@
   font-weight: 700;
 }
 
+.text {
+  white-space: pre-wrap;
+}
+
 .btnContainer {
   display: flex;
   gap: 10px;
@@ -126,10 +130,10 @@ input[type="file"] {
   background-color: var(--font-color-black);
 }
 
-.dogbedge:focus {
+.selectedCategory {
   background-color: var(--deep-green);
 }
 
-.catbedge:focus {
+.selectedCategoryCat {
   background-color: var(--deep-blue);
 }

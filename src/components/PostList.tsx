@@ -6,6 +6,7 @@ import styles from "../styles/PostList.module.css"
 import { MdPlayArrow } from "react-icons/md"
 import { useNavigate } from "react-router-dom"
 import { FaDog, FaCat } from "react-icons/fa"
+import { Link } from "react-router-dom"
 
 export interface Post {
   id: string
@@ -16,6 +17,7 @@ export interface Post {
   createdAt: firebase.firestore.Timestamp
   author: string
   commentCount: number
+  collectionName: string
 }
 
 interface Props {
@@ -35,8 +37,8 @@ export default function PostList({ collectionName, searchResults }: Props) {
   const [hasMorePosts, setHasMorePosts] = useState(true)
   const navigate = useNavigate()
 
-  const handlePostClick = (postId: string) => {
-    navigate(`/content/${collectionName}/${postId}`)
+  const handlePostClick = (postId: string, collectionName?: string) => {
+    navigate(`/content/${collectionName || "posts"}/${postId}`)
   }
 
   const processSearchResults = async (results: Post[]) => {
@@ -190,53 +192,58 @@ export default function PostList({ collectionName, searchResults }: Props) {
         <div className={styles.results}>검색된 결과가 없습니다.</div>
       ) : (
         posts.map((post: Post) => (
-          <div
+          <Link
+            to={`/${post.collectionName || collectionName}/${post.id}`}
             key={post.id}
-            className={styles.container}
-            onClick={() => handlePostClick(post.id)}
           >
-            <div className={styles.textContainer}>
-              <div className={styles.text}>
-                <div className={styles.btnContainer}>
-                  {post.category === "dog" ? (
-                    <label className={styles.dogbedge}>
-                      <FaDog className={styles.icon} />
-                      강아지
-                    </label>
-                  ) : post.category === "cat" ? (
-                    <label className={styles.catbedge}>
-                      <FaCat className={styles.icon} />
-                      고양이
-                    </label>
-                  ) : null}
+            <div
+              key={post.id}
+              className={styles.container}
+              onClick={() => handlePostClick(post.id, post.collectionName)}
+            >
+              <div className={styles.textContainer}>
+                <div className={styles.text}>
+                  <div className={styles.btnContainer}>
+                    {post.category === "dog" ? (
+                      <label className={styles.dogbedge}>
+                        <FaDog className={styles.icon} />
+                        강아지
+                      </label>
+                    ) : post.category === "cat" ? (
+                      <label className={styles.catbedge}>
+                        <FaCat className={styles.icon} />
+                        고양이
+                      </label>
+                    ) : null}
+                  </div>
+                  <span className={styles.title}>{post.title}</span>
+                  <p className={styles.text}>{post.content}</p>
                 </div>
-                <span className={styles.title}>{post.title}</span>
-                <p className={styles.text}>{post.content}</p>
-              </div>
-              <div className={styles.postImg}>
-                {post.imageUrl ? (
-                  <img
-                    src={post.imageUrl}
-                    alt={post.title}
-                    className={styles.img}
-                  />
-                ) : (
-                  <div className={styles.placeholder} />
-                )}
-              </div>
-              <div className={styles.author}>
-                <span>{post.author}</span>
-                <span>댓글 {post.commentCount}</span>
-                <span>
-                  {post.createdAt &&
-                    new Date(
-                      post.createdAt.seconds * 1000 +
-                        post.createdAt.nanoseconds / 1000000,
-                    ).toLocaleString()}
-                </span>
+                <div className={styles.postImg}>
+                  {post.imageUrl ? (
+                    <img
+                      src={post.imageUrl}
+                      alt={post.title}
+                      className={styles.img}
+                    />
+                  ) : (
+                    <div className={styles.placeholder} />
+                  )}
+                </div>
+                <div className={styles.author}>
+                  <span>{post.author}</span>
+                  <span>댓글 {post.commentCount}</span>
+                  <span>
+                    {post.createdAt &&
+                      new Date(
+                        post.createdAt.seconds * 1000 +
+                          post.createdAt.nanoseconds / 1000000,
+                      ).toLocaleString()}
+                  </span>
+                </div>
               </div>
             </div>
-          </div>
+          </Link>
         ))
       )}
       <div className={styles.pageNation}>

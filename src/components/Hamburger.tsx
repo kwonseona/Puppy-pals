@@ -17,7 +17,6 @@ const Hamburger = () => {
         <ImMenu size={24} />
       </div>
       {isOpen && (
-        // 햄버거 메뉴 내용을 여기에 추가하세요.
         <div className={styles.hamburgerMenu}>
           <button className={styles.close} onClick={toggleMenu}>
             닫기
