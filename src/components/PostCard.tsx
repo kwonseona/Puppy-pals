@@ -35,7 +35,7 @@ function PostCard({ data }: PostCardProps) {
   }, [data.author])
 
   const handleClick = () => {
-    navigate(`/content/posts/${data.id}`)
+    navigate(`/posts/${data.id}`)
   }
 
   return (
