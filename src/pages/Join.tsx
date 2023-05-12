@@ -128,6 +128,10 @@ export default function Join() {
           <source src={backgroundVideo} type="video/mp4" />
         </video>
         <div className={styles.loginContainer}>
+          <div className={styles.logo}>
+            <span>우리만에 프리이빗한 공간</span>
+            <img src="src/assets/Puppy Pals.png" />
+          </div>
           <h1>반려인</h1>
           <form className={styles.formContainer} onSubmit={handleSubmit}>
             <div className={styles.inputWrapper}>

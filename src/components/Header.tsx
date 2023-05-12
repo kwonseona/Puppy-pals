@@ -4,13 +4,29 @@ import Nav from "./Nav"
 import HeaderBtn from "./HeaderBtn"
 import { ImMenu } from "react-icons/im"
 import { IoMdClose } from "react-icons/io"
-import { useState } from "react"
+import { useState, useEffect } from "react"
+import firebase from "firebase/compat/app"
+import "firebase/compat/auth"
+import "firebase/compat/firestore"
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false)
+  const [currentUser, setCurrentUser] = useState<firebase.User | null>(null)
+
+  useEffect(() => {
+    const unsubscribe = firebase.auth().onAuthStateChanged((user) => {
+      setCurrentUser(user)
+    })
+
+    return () => unsubscribe()
+  }, [])
 
   const toggleMenu = () => {
     setIsOpen(!isOpen)
+  }
+
+  const handleLogout = async () => {
+    await firebase.auth().signOut()
   }
 
   return (
@@ -42,12 +58,24 @@ export default function Header() {
           </button>
         </div>
         <div className={styles.user}>
-          <Link to="/" onClick={toggleMenu}>
-            <button className={styles.btn}>로그인</button>
-          </Link>
-          <Link to="/MyPage" onClick={toggleMenu}>
-            <button className={styles.btn}>마이페이지</button>
-          </Link>
+          {currentUser ? (
+            <Link to="/MainPage" onClick={handleLogout}>
+              <button className={styles.btn}>로그아웃</button>
+            </Link>
+          ) : (
+            <Link to="/" onClick={toggleMenu}>
+              <button className={styles.btn}>로그인</button>
+            </Link>
+          )}
+          {currentUser ? (
+            <Link to="/MyPage" onClick={toggleMenu}>
+              <button className={styles.btn}>마이페이지</button>
+            </Link>
+          ) : (
+            <Link to="/Join" onClick={toggleMenu}>
+              <button className={styles.btn}>회원가입</button>
+            </Link>
+          )}
         </div>
         <Nav />
       </div>

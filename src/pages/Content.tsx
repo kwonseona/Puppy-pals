@@ -38,6 +38,29 @@ export default function Content({ collectionName }: Props) {
     .collection("likes")
     .doc(`${currentUserId}_${postId}`)
 
+  useEffect(() => {
+    if (post) {
+      setLikeCount(post.likes)
+      fetchUserNickname(post.author).then((fetchedNickname) => {
+        setNickname(fetchedNickname)
+      })
+      checkUserLike()
+    }
+
+    const user = firebase.auth().currentUser
+    if (user) {
+      setCurrentUserId(user.uid)
+    }
+
+    if (post) {
+      fetchComments().then((commentCount) => {
+        const count = commentCount || 0
+        postRef.update({ commentCount: count }) // 댓글 개수를 업데이트
+      })
+      setLikeCount(post.likes)
+    }
+  }, [post, currentUserId])
+
   const checkUserLike = async () => {
     if (currentUserId) {
       const likeDoc = await firestore
@@ -76,42 +99,23 @@ export default function Content({ collectionName }: Props) {
     })
 
     setComments(fetchedComments)
+    await postRef.update({ commentCount: fetchedComments.length }) // 댓글 개수 업데이트
+
+    return fetchedComments.length // return the comment count
   }
-
-  useEffect(() => {
-    if (post) {
-      setLikeCount(post.likes)
-      fetchUserNickname(post.author).then((fetchedNickname) => {
-        setNickname(fetchedNickname)
-      })
-      checkUserLike()
-    }
-
-    const user = firebase.auth().currentUser
-    if (user) {
-      setCurrentUserId(user.uid)
-    }
-
-    if (post) {
-      fetchComments()
-      postRef.update({ commentCount: comments.length })
-    }
-
-    if (post) {
-      setLikeCount(post.likes)
-    }
-  }, [post, currentUserId])
 
   const handleCommentDelete = async (commentId: string) => {
     setComments(comments.filter((comment) => comment.id !== commentId))
 
     // 게시글의 commentCount를 업데이트
-    const updatedCommentCount = post.commentCount - 1
-    await postRef.update({ commentCount: updatedCommentCount })
-    postWithDefaults({
-      ...postWithDefaults,
-      commentCount: updatedCommentCount,
-    })
+    if (post && post.commentCount) {
+      const updatedCommentCount = post.commentCount - 1
+      await postRef.update({ commentCount: updatedCommentCount })
+      postWithDefaults({
+        ...postWithDefaults,
+        commentCount: updatedCommentCount,
+      })
+    }
   }
 
   const addComment = async (e: React.FormEvent) => {
@@ -150,6 +154,18 @@ export default function Content({ collectionName }: Props) {
     } catch (error: any) {
       console.error("Failed to add comment:", error.message)
     }
+
+    // 게시글의 commentCount를 업데이트
+    if (post && post.commentCount) {
+      const updatedCommentCount = post.commentCount + 1
+      await postRef.update({ commentCount: updatedCommentCount })
+      postWithDefaults({
+        ...postWithDefaults,
+        commentCount: updatedCommentCount,
+      })
+    }
+
+    fetchComments()
   }
 
   const handleEdit = () => {

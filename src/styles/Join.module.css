@@ -6,20 +6,31 @@
   top: 0;
   left: 0;
   width: 100%;
-  min-height: 100vh;
+  height: 100%;
   background-color: var(--yellow);
 }
 
 .container video {
   width: 100%;
-  height: auto;
+  height: 100%;
   opacity: 0.8;
+  object-fit: cover;
 }
 
 .logo {
-  position: absolute;
-  left: 215px;
-  top: 451px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 50px;
+}
+
+.logo span {
+  font-weight: 300;
+}
+
+.logo img {
+  width: 200px;
 }
 
 .formContainer {
@@ -29,7 +40,7 @@
 
 .loginContainer {
   position: absolute;
-  width: 738px;
+  width: 50%;
   height: 100%;
   right: 0px;
   top: 0px;
@@ -150,4 +161,49 @@
   position: absolute;
   left: 10px;
   fill: var(--yellow);
+}
+
+@media screen and (max-width: 768px) {
+  .loginContainer {
+    width: 100%;
+    border-radius: 0;
+  }
+
+  .container video {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 425px) {
+  .container video {
+    display: none;
+  }
+
+  .container {
+    position: fixed;
+    top: 0;
+    left: 0;
+  }
+
+  .loginContainer {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    border-radius: 0;
+  }
+
+  .input {
+    position: relative;
+    width: 300px;
+    height: 46px;
+    padding: 30px 40px;
+    border-bottom: 2px solid var(--yellow);
+    font-size: 12px;
+  }
+
+  .btn {
+    width: 100px;
+    font-size: 14px;
+  }
 }
