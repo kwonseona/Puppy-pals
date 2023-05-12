@@ -4,7 +4,7 @@ import "firebase/compat/firestore"
 import "firebase/compat/auth"
 import styles from "../styles/PostList.module.css"
 import { MdPlayArrow } from "react-icons/md"
-import { useNavigate } from "react-router-dom"
+import { useLocation, useNavigate } from "react-router-dom"
 import { FaDog, FaCat } from "react-icons/fa"
 import { Link } from "react-router-dom"
 
@@ -36,9 +36,12 @@ export default function PostList({ collectionName, searchResults }: Props) {
     useState<firebase.firestore.QueryDocumentSnapshot | null>(null)
   const [hasMorePosts, setHasMorePosts] = useState(true)
   const navigate = useNavigate()
+  const location = useLocation()
 
-  const handlePostClick = (postId: string, collectionName?: string) => {
-    navigate(`/content/${collectionName || "posts"}/${postId}`)
+  const handlePostClick = (postId: string, collectionName: string) => {
+    navigate(`/${collectionName || "QnAposts"}/${postId}`, {
+      state: { from: location },
+    })
   }
 
   const processSearchResults = async (results: Post[]) => {
@@ -131,6 +134,7 @@ export default function PostList({ collectionName, searchResults }: Props) {
           ...postData,
           author: authorNickname,
           commentCount,
+          collectionName: collectionName,
         }
       }),
     )
