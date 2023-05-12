@@ -99,23 +99,19 @@ export default function Content({ collectionName }: Props) {
     })
 
     setComments(fetchedComments)
-    await postRef.update({ commentCount: fetchedComments.length }) // 댓글 개수 업데이트
 
-    return fetchedComments.length // return the comment count
+    const count = fetchedComments.length
+    await postRef.update({ commentCount: count }) // 댓글 개수 업데이트
+
+    return count // return the comment count
   }
 
   const handleCommentDelete = async (commentId: string) => {
     setComments(comments.filter((comment) => comment.id !== commentId))
 
     // 게시글의 commentCount를 업데이트
-    if (post && post.commentCount) {
-      const updatedCommentCount = post.commentCount - 1
-      await postRef.update({ commentCount: updatedCommentCount })
-      postWithDefaults({
-        ...postWithDefaults,
-        commentCount: updatedCommentCount,
-      })
-    }
+    const commentCount = await fetchComments()
+    await postRef.update({ commentCount })
   }
 
   const addComment = async (e: React.FormEvent) => {
@@ -140,32 +136,17 @@ export default function Content({ collectionName }: Props) {
         createdAt: firebase.firestore.Timestamp.fromDate(new Date()),
       }
 
+      const commentCount = await fetchComments()
+
       await firestore.collection("comments").add(newComment)
       setCommentText("")
       fetchComments()
 
       // 게시글의 commentCount를 업데이트
-      const updatedCommentCount = post.commentCount + 1
-      await postRef.update({ commentCount: updatedCommentCount })
-      postWithDefaults({
-        ...postWithDefaults,
-        commentCount: updatedCommentCount,
-      })
+      await postRef.update({ commentCount })
     } catch (error: any) {
       console.error("Failed to add comment:", error.message)
     }
-
-    // 게시글의 commentCount를 업데이트
-    if (post && post.commentCount) {
-      const updatedCommentCount = post.commentCount + 1
-      await postRef.update({ commentCount: updatedCommentCount })
-      postWithDefaults({
-        ...postWithDefaults,
-        commentCount: updatedCommentCount,
-      })
-    }
-
-    fetchComments()
   }
 
   const handleEdit = () => {
