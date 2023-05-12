@@ -16,6 +16,12 @@
   color: var(--font-color-light-gray);
 }
 
+@media screen and (max-width: 768px) {
+  .searchBar {
+    width: 400px;
+  }
+}
+
 @media screen and (max-width: 425px) {
   .searchBar {
     width: 300px;
