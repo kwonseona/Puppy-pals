@@ -14,12 +14,15 @@ import Content from "./pages/Content"
 import Footer from "./components/Footer"
 import PostBtn from "./components/PostBtn"
 import SearchResultsPage from "./pages/SearchResultPage"
+import { useAuth } from "./components/AuthProvider"
 
 function App() {
+  const { isLoggedIn } = useAuth()
+
   return (
     <Router>
       <Header />
-      <PostBtn />
+      <PostBtn isLoggedIn={isLoggedIn} />
       <Routes>
         <Route path="/" element={<Login />} />
         <Route path="/MainPage" element={<MainPage />} />

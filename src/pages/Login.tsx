@@ -84,7 +84,7 @@ export default function Login() {
               </button>
               <Link to="/MainPage">
                 <button className={styles.btn} type="submit">
-                  비로그인
+                  비회원
                 </button>
               </Link>
             </div>

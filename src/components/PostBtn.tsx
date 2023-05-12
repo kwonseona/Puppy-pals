@@ -9,7 +9,11 @@ import {
 } from "react-router-dom"
 import styles from "../styles/PostBtn.module.css"
 
-export default function PostBtn() {
+interface PostBtnProps {
+  isLoggedIn: boolean
+}
+
+export default function PostBtn({ isLoggedIn }: PostBtnProps) {
   const [isPopupOpen, setIsPopupOpen] = useState(false)
 
   const togglePopup = () => {
@@ -17,8 +21,18 @@ export default function PostBtn() {
   }
 
   const closePopup = (e: React.MouseEvent<HTMLDivElement>) => {
-    if ((e.target as HTMLDivElement).className.includes(styles.overlay)) {
+    const target = e.target as HTMLDivElement
+    if (target && target.className.includes(styles.overlay)) {
       setIsPopupOpen(false)
+    }
+  }
+
+  const handlePostCreation = () => {
+    if (!isLoggedIn) {
+      alert("로그인 후 사용이 가능합니다.")
+      togglePopup()
+    } else {
+      togglePopup()
     }
   }
 
@@ -69,14 +83,20 @@ export default function PostBtn() {
       >
         <div className={`${styles.popup} ${isPopupOpen ? styles.show : ""}`}>
           <div className={styles.container}>
-            <Link to="/CreatePost" onClick={togglePopup}>
+            <Link
+              to={isLoggedIn ? "/CreatePost" : "/"}
+              onClick={handlePostCreation}
+            >
               <div className={styles.coummunity}>
                 <span>커뮤니티 글 작성</span>
                 <p>자유롭게 소통해보세요.</p>
               </div>
             </Link>
             <div className={styles.line}></div>
-            <Link to="/CreateQnA" onClick={togglePopup}>
+            <Link
+              to={isLoggedIn ? "/CreateQnA" : "/"}
+              onClick={handlePostCreation}
+            >
               <div className={styles.qna}>
                 <span>QnA 글 작성</span>
                 <p>궁금한 점을 여러 사람에게 물어보고 답변을 받아보세요.</p>
