@@ -37,7 +37,7 @@ export default function Header() {
         </Link>
       </div>
       <div className={styles.navDesktop}>
-        <Nav />
+        <Nav toggleMenu={toggleMenu} />
       </div>
       {isOpen == false && (
         <div className={styles.hamburger} onClick={toggleMenu}>
@@ -77,7 +77,7 @@ export default function Header() {
             </Link>
           )}
         </div>
-        <Nav />
+        <Nav toggleMenu={toggleMenu} />
       </div>
       <HeaderBtn />
     </div>

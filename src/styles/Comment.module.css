@@ -33,3 +33,15 @@
   font-size: 15px;
   font-weight: 400;
 }
+
+@media screen and (max-width: 768px) {
+  .container {
+    width: 600px;
+  }
+}
+
+@media screen and (max-width: 425px) {
+  .container {
+    width: 300px;
+  }
+}

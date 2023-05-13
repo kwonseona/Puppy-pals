@@ -12,7 +12,7 @@ h1 {
 
 .cardGrid {
   margin: 0 auto;
-  padding-bottom: 30px;
+  padding-bottom: 130px;
   max-width: 813px;
   display: grid;
   grid-template-columns: 1fr 1fr;

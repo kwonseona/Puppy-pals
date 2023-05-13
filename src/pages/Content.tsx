@@ -39,28 +39,36 @@ export default function Content({ collectionName }: Props) {
     .doc(`${currentUserId}_${postId}`)
 
   useEffect(() => {
-    if (post) {
-      setLikeCount(post.likes)
-      fetchUserNickname(post.author).then((fetchedNickname) => {
-        setNickname(fetchedNickname)
-      })
-      checkUserLike()
+    const fetchData = async () => {
+      try {
+        if (post) {
+          setLikeCount(post.likes)
+
+          const fetchedNickname = await fetchUserNickname(post.author)
+          setNickname(fetchedNickname)
+
+          await checkUserLike()
+
+          const commentCount = await fetchComments()
+          const count = commentCount || 0
+          await postRef.update({ commentCount: count }) // 댓글 개수를 업데이트
+
+          setLikeCount(post.likes)
+        }
+
+        const user = firebase.auth().currentUser
+        if (user) {
+          setCurrentUserId(user.uid)
+        }
+      } catch (error: any) {
+        return ""
+      }
     }
 
-    const user = firebase.auth().currentUser
-    if (user) {
-      setCurrentUserId(user.uid)
-    }
-
-    if (post) {
-      fetchComments().then((commentCount) => {
-        const count = commentCount || 0
-        postRef.update({ commentCount: count }) // 댓글 개수를 업데이트
-      })
-      setLikeCount(post.likes)
-    }
+    fetchData()
   }, [post, currentUserId])
 
+  //좋아요
   const checkUserLike = async () => {
     if (currentUserId) {
       const likeDoc = await firestore
@@ -76,6 +84,7 @@ export default function Content({ collectionName }: Props) {
     }
   }
 
+  //댓글
   const handleCommentUpdate = (updatedComment: CommentData) => {
     setComments(
       comments.map((comment) =>
@@ -85,25 +94,29 @@ export default function Content({ collectionName }: Props) {
   }
 
   const fetchComments = async () => {
-    const commentSnapshot = await firestore
-      .collection("comments")
-      .where("postId", "==", postId)
-      .orderBy("createdAt", "desc")
-      .get()
+    try {
+      const commentSnapshot = await firestore
+        .collection("comments")
+        .where("postId", "==", postId)
+        .orderBy("createdAt", "desc")
+        .get()
 
-    const fetchedComments: CommentData[] = []
+      const fetchedComments: CommentData[] = []
 
-    commentSnapshot.forEach((doc) => {
-      const data = doc.data() as CommentData
-      fetchedComments.push({ ...data, id: doc.id })
-    })
+      commentSnapshot.forEach((doc) => {
+        const data = doc.data() as CommentData
+        fetchedComments.push({ ...data, id: doc.id })
+      })
 
-    setComments(fetchedComments)
+      setComments(fetchedComments)
 
-    const count = fetchedComments.length
-    await postRef.update({ commentCount: count }) // 댓글 개수 업데이트
+      const count = fetchedComments.length
+      await postRef.update({ commentCount: count }) // 댓글 개수 업데이트
 
-    return count // return the comment count
+      return count // return the comment count
+    } catch (error: any) {
+      return ""
+    }
   }
 
   const handleCommentDelete = async (commentId: string) => {
@@ -150,6 +163,7 @@ export default function Content({ collectionName }: Props) {
     }
   }
 
+  // 게시글 수정 삭제
   const handleEdit = () => {
     navigate(`/${collectionName}/edit/${postId}`, { state: { post } })
   }
@@ -171,6 +185,7 @@ export default function Content({ collectionName }: Props) {
     }
   }
 
+  //사용자 정보 불러오기
   const fetchUserNickname = async (userId: string): Promise<string> => {
     try {
       const userDoc = await firebase

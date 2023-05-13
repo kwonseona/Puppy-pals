@@ -68,7 +68,7 @@ export default function MainPage() {
         next={loadMorePosts} // 스크롤이 끝에 도달할 때마다 loadMorePosts 함수를 호출
         hasMore={hasMore}
         loader={<h4>Loading...</h4>}
-        endMessage={<p>더 이상 게시물이 없습니다.</p>}
+        endMessage={<h4>더 이상 게시물이 없습니다.</h4>}
         className={styles.cardGrid}
       >
         {posts.map((post) => (

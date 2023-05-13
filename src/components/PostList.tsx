@@ -38,6 +38,15 @@ export default function PostList({ collectionName, searchResults }: Props) {
   const navigate = useNavigate()
   const location = useLocation()
 
+  useEffect(() => {
+    if (searchResults) {
+      processSearchResults(searchResults)
+    } else {
+      fetchPosts()
+      fetchTotalPosts()
+    }
+  }, [currentPage, collectionName, searchResults])
+
   const handlePostClick = (postId: string, collectionName: string) => {
     navigate(`/${collectionName || "QnAposts"}/${postId}`, {
       state: { from: location },
@@ -59,15 +68,6 @@ export default function PostList({ collectionName, searchResults }: Props) {
 
     setPosts(processedResults)
   }
-
-  useEffect(() => {
-    if (searchResults) {
-      processSearchResults(searchResults)
-    } else {
-      fetchPosts()
-      fetchTotalPosts()
-    }
-  }, [currentPage, collectionName, searchResults])
 
   const fetchCommentCount = async (postId: string): Promise<number> => {
     try {
@@ -261,7 +261,7 @@ export default function PostList({ collectionName, searchResults }: Props) {
         {renderPageLinks()}
         <button
           onClick={() => handlePageChange(currentPage + 1)}
-          disabled={!hasMorePosts}
+          disabled={!hasMorePosts || currentPage === totalPages}
         >
           <MdPlayArrow className={styles.btn} />
         </button>
