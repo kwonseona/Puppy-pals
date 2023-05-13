@@ -98,9 +98,33 @@ span {
   opacity: 0.6;
 }
 
+@media screen and (max-width: 768px) {
+  .container {
+    gap: 20px;
+  }
+
+  .container p {
+    font-size: 14px;
+  }
+}
+
 @media screen and (max-width: 425px) {
+  .container {
+    gap: 5px;
+  }
+
   .postBtn {
     top: 75%;
     left: 80%;
+  }
+
+  .coummunity,
+  .qna {
+    width: 200px;
+    font-size: 12px;
+  }
+
+  .container p {
+    font-size: 10px;
   }
 }

@@ -99,7 +99,7 @@ export default function PostBtn({ isLoggedIn }: PostBtnProps) {
             >
               <div className={styles.qna}>
                 <span>QnA 글 작성</span>
-                <p>궁금한 점을 여러 사람에게 물어보고 답변을 받아보세요.</p>
+                <p>여러 사람에게 답변을 받아보세요.</p>
               </div>
             </Link>
           </div>
