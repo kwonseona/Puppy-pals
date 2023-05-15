@@ -2,6 +2,7 @@
 
 .post {
   width: 700px;
+  min-height: calc(100vh - 82px);
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -69,7 +70,6 @@
 }
 
 .titleText {
-  width: 700px;
   height: 40px;
   padding: 0 20px;
   border: 1px solid var(--yellow);
@@ -77,7 +77,6 @@
 }
 
 .text {
-  width: 700px;
   height: 500px;
   padding: 20px;
   border: 1px solid var(--yellow);
@@ -136,4 +135,14 @@ input[type="file"] {
 
 .selectedCategoryCat {
   background-color: var(--deep-blue);
+}
+
+@media screen and (max-width: 425px) {
+  .post {
+    width: 300px;
+  }
+
+  .middleContainer {
+    width: 300px;
+  }
 }

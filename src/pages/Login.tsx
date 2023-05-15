@@ -35,13 +35,14 @@ export default function Login() {
 
     try {
       await firebase.auth().signInWithPopup(provider)
-      alert("구글 로그인이 성공적으로 되었습니다.")
+      alert("Google 로그인에 성공했습니다.")
       navigate("/MainPage")
     } catch (error: any) {
-      if (error.code === "로그인 실패") {
-        alert("로그인에 실패 하였습니다.")
+      console.error("Error during Google sign-in: ", error)
+      if (error.code === "auth/popup-closed-by-user") {
+        alert("인증을 완료하기 전에 팝업이 닫혔습니다. 다시 시도하십시오.")
       } else {
-        alert(error.message)
+        alert("Google 로그인 중 오류가 발생했습니다. 다시 시도하십시오.")
       }
     }
   }

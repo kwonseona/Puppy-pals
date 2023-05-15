@@ -9,12 +9,14 @@
 }
 
 .nav li {
-  padding: 8px 0px;
+  display: flex;
+  align-items: center;
+  height: 35px;
   cursor: pointer;
 }
 
 .nav li:hover {
-  border-bottom: 3px solid var(--white);
+  opacity: 0.5;
 }
 
 @media screen and (max-width: 768px) {
