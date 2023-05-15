@@ -8,6 +8,8 @@
 
 ## 기술 스택
 
+> 기능 영상은 [유튜브](https://www.youtube.com/playlist?list=PLvtDFkreZZvxQ5lJrYEh6mUSK52qCL3Ki) 에서 고화질로 볼 수 있습니다.
+
 - Home
 
   - 베스트 게시물 - 무한 스크롤 (infinite scroll)
@@ -17,13 +19,17 @@
   - HTML form
   - 비밀번호 체크 및 이메일 양식 확인
 
-{% include video.html id="유튜브동영상url" %}
+![로그인](https://github.com/kwonseona/Puppy-pals/assets/119383369/beba8f30-976b-4673-af39-149994e41285)
 
 > 로그인
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/WHOdKAW7Smg?controls=0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+![구글_로그인](https://github.com/kwonseona/Puppy-pals/assets/119383369/197dbee7-b1a4-486a-b76d-993d4abb81af)
 
 > 구글 로그인
+
+![회원가입](https://github.com/kwonseona/Puppy-pals/assets/119383369/c5bd2651-1ca7-4b21-8aed-7f020e3f0901)
+
+> 회원가입
 
 - 커뮤니티/QnA
 
@@ -32,39 +38,37 @@
   - 로그인한 사용자만 게시물 작성 가능
   - 로그인하지 않은 사용자의 경우 로그인 페이지로 리디렉션
   - 좋아요 버튼과 댓글 작성
-
-  <iframe width="560" height="315" src="https://www.youtube.com/embed/g-ppXukYQSY?controls=0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-
-- 글 작성
-
+  - 글 작성
   - 첨부파일 등록 지원 (img 파일만 가능)
   - HTML form
+
+![글쓰기_기능](https://github.com/kwonseona/Puppy-pals/assets/119383369/8065eb66-5d9a-4310-b653-58a8569d76dc)
 
 - 마이페이지
 
   - 사용자 정보 편집
   - 프로필 이미지 등록
 
-  <iframe width="560" height="315" src="https://www.youtube.com/embed/pEKr2KnTnR0?controls=0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+![마이페이지_기능](https://github.com/kwonseona/Puppy-pals/assets/119383369/a2925e9a-1d95-4374-ab0f-2c66567d849d)
 
 - 검색
   - 제목 검색
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/aX5nl_SLXBI?controls=0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+![검색](https://github.com/kwonseona/Puppy-pals/assets/119383369/b9bdd3f1-1527-4b58-9a84-d9d34d28f203)
 
 - 댓글/좋아요
 
   - 로그인한 사용자만 좋아요 및 댓글 작성 가능
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/dbKY6wQ1UEU?controls=0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+![댓글](https://github.com/kwonseona/Puppy-pals/assets/119383369/5bd5299d-2a5e-498c-8c25-5703adde61e6)
 
 > 댓글 작성
 
-  <iframe width="560" height="315" src="https://www.youtube.com/embed/yRAapPKJDwo?controls=0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+![댓글_수정](https://github.com/kwonseona/Puppy-pals/assets/119383369/a92cca40-14a0-4af6-81b9-229619c95f5e)
 
 > 댓글 수정
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/g1x-7C7Btbk?controls=0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+![좋아요](https://github.com/kwonseona/Puppy-pals/assets/119383369/1e48bb50-8775-4fa3-96ad-33baf1d5cf08)
 
 > 좋아요
 
