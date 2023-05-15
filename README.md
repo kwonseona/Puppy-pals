@@ -17,9 +17,9 @@
   - HTML form
   - 비밀번호 체크 및 이메일 양식 확인
 
-  <iframe width="560" height="315" src="https://www.youtube.com/embed/CbwfyAg3BjE?controls=0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+{% include video.html id="유튜브동영상url" %}
 
-  > 로그인
+> 로그인
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/WHOdKAW7Smg?controls=0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
