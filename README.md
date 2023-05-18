@@ -24,7 +24,7 @@
 
 _자세한 개발 스택은 package.json 참고_
 
-### 📄 Pages
+## 📄 Pages
 
 1. `pages/Content.tsx` : 게시글 콘텐츠
 2. `pages/Community.tsx` : 커뮤니티 페이지
