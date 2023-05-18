@@ -1,12 +1,54 @@
 # Puppy-Pals [개인 프로젝트]
 
-## 기획 배경
+## 🔧 Installation
 
-- 반려동물 커뮤니티인 "Puppy Pals"는 반려동물을 키우는 사람들이 함께 모여 서로 배울수 있는 전용 공간에 대한 필요성이 커지면서 시작되었습니다.
+1. Clone this repo by running `git clone https://github.com/kwonseona/Puppy-pals`
+2. `cd Puppy-pals`
+3. `npm install`
+4. `npm run dev`
+
+## ⚡️ Built With
+
+| package name                    | version |
+| ------------------------------- | ------- |
+| @firebase/firestore             | ^3.11.0 |
+| @types/firebase                 | ^3.2.1  |
+| firebase                        | ^9.21.0 |
+| react                           | ^18.2.0 |
+| react-dom                       | ^18.2.0 |
+| react-firebase-hooks            | ^3.0.4  |
+| react-helmet                    | ^6.1.0  |
+| react-icons                     | ^4.8.0  |
+| react-infinite-scroll-component | ^6.1.0  |
+| react-router-dom                | ^6.10.0 |
+
+_자세한 개발 스택은 package.json 참고_
+
+### 📄 Pages
+
+1. `pages/Content.tsx` : 게시글 콘텐츠
+2. `pages/Community.tsx` : 커뮤니티 페이지
+3. `pages/Join.tsx` : 회원가입 페이지
+4. `pages/Login.tsx` : 로그인 페이지
+5. `pages/mainPage.tsx` : 메인 페이지
+6. `pages/MyPage.tsx` : 마이페이지
+7. `pages/MyPagePet.tsx` : 마이페이지 - 반려동물 정보 페이지
+8. `pages/Post.tsx` : 게시글 작성 페이지
+9. `pages/QnA.tsx` : QnA 페이지
+10. `pages/SearchResiltPage.tsx` : 검색 결과 페이지
+
+## 💁🏻‍♀️ Information
+
+- [Project Notion](https://www.notion.so/2-4-980ec0107e1548fd9e50e6e61b931909?pvs=4)
+- 제로베이스 - 개인 프로젝트
+
+### 📝 기획 배경
+
+- 반려동물 커뮤니티인 |Puppy Pals|는 반려동물을 키우는 사람들이 함께 모여 서로 배울수 있는 전용 공간에 대한 필요성이 커지면서 시작되었습니다.
 - 반려동물을 키우는 사람들의 수가 증가함에 따라, 반려동물과 주인을 위해 기획된 커뮤니티가 필수적이라고 생각이 들었습니다.
 - 대부분의 반려동물 커뮤니티는 제품의 홍보성이 강해 그 점을 분리 시켜, 진정성 있게 반려 동물에 대해 이야기를 할 수 있는 공간으로 사용하고 싶어 기획하게 되었습니다.
 
-## 기술 스택
+### 👀 기술 스택
 
 > 기능 영상은 [유튜브](https://www.youtube.com/playlist?list=PLvtDFkreZZvxQ5lJrYEh6mUSK52qCL3Ki) 에서 고화질로 볼 수 있습니다.
 
@@ -20,16 +62,8 @@
   - 비밀번호 체크 및 이메일 양식 확인
 
 ![로그인](https://github.com/kwonseona/Puppy-pals/assets/119383369/beba8f30-976b-4673-af39-149994e41285)
-
-> 로그인
-
 ![구글_로그인](https://github.com/kwonseona/Puppy-pals/assets/119383369/197dbee7-b1a4-486a-b76d-993d4abb81af)
-
-> 구글 로그인
-
 ![회원가입](https://github.com/kwonseona/Puppy-pals/assets/119383369/c5bd2651-1ca7-4b21-8aed-7f020e3f0901)
-
-> 회원가입
 
 - 커뮤니티/QnA
 
@@ -71,10 +105,14 @@
 
 > 좋아요
 
-## 개발 기간
+### ⌚️ 개발 기간
 
 2023-04-29 ~ 2023-05-15 (총 17일 소요)
 
-## 기여도
+### 📈 기여도
 
 개인프로젝트 (100%)
+
+## 🙍🏻‍♀️ Author
+
+- [seona Kwon(권선아)](https://github.com/kwonseona)
